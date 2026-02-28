@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 
-export const selGuAtom = atom(null);
+export const selGuAtom = atom("");
 export const festivalFetchData = atom(async() => {
 
     const apikey = import.meta.env.VITE_API_KEY;

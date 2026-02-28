@@ -43,14 +43,19 @@ function Login() {
   }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 실행되도록 함
 
 
+  // session 변경 시 로그인 상태 동기화
+  useEffect(() => {
+    if (session) setIsLogin(true);
+  }, [session]);
+
   // GitHub OAuth를 사용하여 로그인하는 비동기 함수
   const signInWithGithub = async () => {
     await supabase.auth.signInWithOAuth({
       provider: 'github',
+      options: {
+        redirectTo: `${redirectUrl}/`
+      }
     });
-    useEffect(() => {
-      if (session) setIsLogin(true);
-    }, [session]);
   };
 
   // 로그아웃하는 비동기 함수

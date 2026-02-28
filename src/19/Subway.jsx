@@ -1,84 +1,78 @@
-import { useRef, useState } from "react"
-import TailSelect from "../components/TailSelect"
-import SubwayBox from "./SubwayBox"
+import sarea from "./sarea.json";
+import SubwayBox from "./SubwayBox";
+import TailSelect from "../components/TailSelect";
+import { useState, useRef, use, Suspense } from "react";
 
-export default function Subway() {
-  //json파일 구분할 변수 지정하기 
-  //const [sarc, setSarc] = useState
-  const [data, setTdata] = useState([]);
+const dataCache = new Map();
 
-  // getYesterday 사용하여 dt 설정하기
-  
-  const selAreaRef = useRef();
-  
-  // 같으면 sarea[current.value] 
-  const handleArea = () => {
-    console.log(selAreaRef.current.value);
-    if (sel1Ref.current.value ==  ""){};
-
-  }  
-
-  const sel1Ref = useRef();
-  const sel2Ref = useRef();
-
-  
-  // 주소에서
-  // 필요한 item data만 가져오기
-  const getFetchDdata = async () => {
-    const apikey= import.meta.env.VITE_API_KEY;
-    const baseurl = `/api/6260000/IndoorAirQuality/getIndoorAirQualityByStation?`;
-    let url= `${baseurl}serviceKey=${apikey}&pageNo=1&numOfRows=5&resultType=xml&controlnumber=${dt}&areaIndex=${selAreaRef}`
-
-    console.log(url);
-
-    try {
-      const resp = await fetch(url);
-      const data = await resp.json();
-
-      setTdata(data.items.item)
-    } catch (error){
-      console.log(error)
+function fetchData(area) {
+    const dt = new Date().toISOString().slice(0, 10).replaceAll('-', '');
+    const apikey = import.meta.env.VITE_API_KEY;
+    const baseUrl = "/api/6260000/IndoorAirQuality/getIndoorAirQualityByStation?";
+    let url = `${baseUrl}serviceKey=${apikey}&pageNo=1&numOfRows=50`;
+    url = `${url}&resultType=json&controlnumber=${dt}&areaIndex=${area}`;
+    if (!dataCache.has(url)) {
+        const promise = fetch(url)
+            .then(resp => {
+                if (!resp.ok) throw new Error(`HTTP error! status: ${resp.status}`);
+                return resp.json();
+            })
+            .then(data => {
+                if (data.response.body.items === "" || !data.response.body.items) return [];
+                let tm = data.response.body.items.item;
+                tm = tm.sort((a, b) => a.controlnumber - b.controlnumber);
+                return tm;
+            });
+        dataCache.set(url, promise);
     }
-
-  }
-
-    
-  return (
-    <div className="w-full flex justify-start items-center">
-      <h1 className="w-full flex text-2xl font-bold p-5 m-4 "> 측정소 선택</h1>
-        <div className="w-full">
-          <TailSelect id="sel1"
-                      ref={selAreaRef}
-                      title="측정소"
-                      opk={Object.keys(sarea)}
-                      opv={Object.values(sarea)}
-                      onHandle={handleArea}
-          /> 
-        </div>
-        <div>
-        <SubwayBox className="w-full flex-1"
-                   />
-        </div>
-    </div>
-  )
+    return dataCache.get(url);
 }
 
+function SubwayData({ area }) {
+    const tdata = use(fetchData(area));
+    return (
+        <div className="w-full">
+            {tdata.length > 0 ? (
+                tdata.map((item, idx) => (
+                    <SubwayBox key={item.controlnumber} idx={idx % 2} item={item} />
+                ))
+            ) : (
+                <div className="w-full text-center p-5">해당 지역의 데이터가 없습니다.</div>
+            )}
+        </div>
+    );
+}
 
-// find map filter
-//<select>
-    //  <option> -- </option> value
-    //      event  onchange 이벤트로 잡음. 이때 발생한 값
-    //      data. array형식 
-    //   for문 대신  (.map  )으로 option get
-    //                          코드 갯수 만큼 option 여러개 도출됨.
-    //                            코드의 value를 map으로 잡아서 배열 
-    //   () => {return }
-
-    //    sarea.map((i) => {obj})
-    //    
-    // pm10~ co2 object의 코드만큼 .map item의 c
-    //            object.keys(scode).map( c => item(c))
-    
-    // 짝수, 홀수로 색 변경 -> 클래스명 전체로 색 
-    // 정렬(sort)하여 시간대 설정 control number 
-    
+export default function Subway() {
+    const [selectedArea, setSelectedArea] = useState(null);
+    const selAreaRef = useRef();
+    const handleSelect = () => {
+        const areaValue = selAreaRef.current.value;
+        if (areaValue) setSelectedArea(areaValue);
+        else setSelectedArea(null);
+    };
+    return (
+        <div className="w-9/10 flex flex-col justify-start items-center mt-10">
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                <h1 className="w-full p-5 text-2xl font-bold text-center">
+                    부산 실내공기질 정보
+                </h1>
+                <TailSelect
+                    id="selArea"
+                    ref={selAreaRef}
+                    title="부산지하철역"
+                    opk={sarea.map(item => item["코드"])}
+                    opv={sarea.map(item => item["측정소"])}
+                    onHandle={handleSelect}
+                />
+            </div>
+            <Suspense fallback={<div className="w-full text-center text-xl font-bold p-5">로딩중...</div>}>
+                {selectedArea ? (
+                    <SubwayData area={selectedArea} />
+                ) : (
+                    <div className="w-full text-center p-5">지역을 선택해주세요.</div>
+                )}
+            </Suspense>
+        </div>
+    );
+}

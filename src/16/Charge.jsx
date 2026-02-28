@@ -188,7 +188,7 @@ export default function Charge() {
         (tdata.length != 0) &&
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mt-5">
           {
-            tdata.map((item, idx) => <Link to="/ChargerInfo/detail"
+            tdata.map((item, idx) => <Link to="/Charge/detail"
                                             key={item.statId + idx}
                                             state={{ item: item }}>
                                             <ChargerStat key={item.statId}

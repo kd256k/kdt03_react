@@ -1,7 +1,5 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-
 // import Hello from './01/Hello'
 // import Current from './01/Current'
 import MyClock from './02/MyClock';
@@ -27,6 +25,7 @@ import CharageDetail from './16/CharageDetail';
 //import JotaiCnt from './17/JotaiCnt';
 import TodoList from './18_1/TodoList';
 import Subway from './19/Subway';
+import Login from './Login'
 
 export default function App() {
   return (
@@ -35,7 +34,7 @@ export default function App() {
       <Header/>
       <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
       <Routes>
-        <Route path="/" element={<MyClock/>} />
+        <Route path='/' element={<Login />} />
         <Route path="/lotto" element={<Lotto/>}/>
         <Route path="/box" element={<BoxOffice />}/>
         <Route path="/gallery" element={<Gallery />}/>

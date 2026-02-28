@@ -7,13 +7,14 @@ export default defineConfig({
   plugins: [react(),
               tailwind(),
             ],
-server: {
-proxy: {
-'/api': {
-target: 'https://apis.data.go.kr',
-changeOrigin: true,
-rewrite: (path) => path.replace(/^\/api/, '')
-}
-}
-}
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://apis.data.go.kr',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })

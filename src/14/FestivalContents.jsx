@@ -4,7 +4,6 @@ import TailButton from "../components/TailButton";
 export default function FestivalContents() {
   const location = useLocation();
   const item = location.state.contents;
-  console.log(item)
 
   const navigate = useNavigate();
   const handleHome = () => {
@@ -12,7 +11,6 @@ export default function FestivalContents() {
   }
 
   const kakaoMapUrl = `https://map.kakao.com/link/map/${item?.MAIN_PLACE.replace(',','').replace(' ','')},${item?.LAT},${item?.LNG}`;
-  console.log(kakaoMapUrl)
 
   return (
     <div className="w-full flex flex-col justify-start items-center">
