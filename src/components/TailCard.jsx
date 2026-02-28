@@ -19,7 +19,8 @@ export default function TailCard({ imgUrl, title, subtitle, tag }) {
         <div className="max-w-sm h-96 bg-white border border-gray-200 rounded-lg shadow-sm">
             <div>
                 <img className="rounded-t-lg w-full h-46 object-cover"
-                    src={imgUrl} alt="" />
+                    src={imgUrl} alt=""
+                    onError={(e) => { e.currentTarget.src = "https://placehold.co/400x300?text=No+Image"; }} />
             </div>
             <div className="p-2 h-50 flex flex-col jusify-between">
                 <div>

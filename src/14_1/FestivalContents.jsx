@@ -44,9 +44,6 @@ export default function FestivalContents() {
         </div>
       </div>
       </div>
-
-
-
       <div className="w-full flex justify-center items-center mt-5">
         <TailButton caption="목록으로" color="blue" onHandle={handleHome} />
       </div>

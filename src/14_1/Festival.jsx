@@ -8,7 +8,7 @@ import { festivalFetchData, selGuAtom } from './atomFestival';
 
 export default function Festival() {
   return (
-  <Suspense fallback="<div>로딩중...</div>" >
+  <Suspense fallback={<div className="w-full text-center text-xl font-bold p-5">로딩중...</div>}>
     <FestivalContent />
   </Suspense>
   );
@@ -21,7 +21,6 @@ function FestivalContent() {
     const [areaFestival, setAreaFestival] = useState([]);
     
     const selRef = useRef();
-
 
     const handleChange = () => {
       SetGu(selRef.current.value);
@@ -68,7 +67,6 @@ function FestivalContent() {
 
     
   return (
-    <div>
          <div className="w-full h-full flex flex-col justify-start items-center">
               <div className="w-9/10 p-5 h-1/4   
                                 bg-amber-50 
@@ -84,7 +82,7 @@ function FestivalContent() {
                                  focus:ring-blue-500 focus:border-blue-500 block p-2.5 '
                         onChange={handleChange}>
                                                
-                        <option value="">--- 지역을 선택하세요---</option>
+                      <option value="">--- 지역을 선택하세요---</option>
                         {area}
                     </select>
                 </div>
@@ -92,21 +90,18 @@ function FestivalContent() {
               <div className="mt-4 w-9/10 h-3/4 overflow-y-auto 
                               grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {
-                  areaFestival.map((item,idx) =>  <Link to="/Festival/contents"
-                                                      state={{contents:item }}
-                                                      key={item.UC_SEQ+idx}
-                                                      
-                                                      >
-                                                      <TailCard key ={item.UC_SEQ}
+                  areaFestival.map((item,idx) =>  <Link to="/festival/contents"
+                                                        state={{contents:item}}
+                                                        key={item.UC_SEQ+idx}>
+                                                  <TailCard key ={item.UC_SEQ}
                                                         imgUrl={item.MAIN_IMG_THUMB}
-                                                        title={item.MAIN_TITLE} 
+                                                        title={item.MAIN_TITLE.includes('(') ? item.MAIN_TITLE.split('(')[0]: item.MAIN_TITLE} 
                                                         subtitle={item.TRFC_INFO} 
-                                                        tag={item.ADDR1}  
-                                                        /> 
+                                                        tag={item.ADDR1}/> 
                                                         </Link>)
                 }
               </div> 
             </div>
-    </div>
+    
   )
 }

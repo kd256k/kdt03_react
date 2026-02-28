@@ -16,7 +16,7 @@ export default function Gallery() {
     const getFetchData = async () => {
         const apikey = import.meta.env.VITE_API_KEY;    
 
-        const baseUrl = '/api/B551011/photo-api/gallerySearchList1?';
+        const baseUrl = '/api/B551011/PhotoGalleryService1/gallerySearchList1?';
         const kw = encodeURI(kwRef.current.value);
         let url = `${baseUrl}serviceKey=${apikey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A`;
         url = `${url}&keyword=${kw}&_type=json`;
@@ -24,6 +24,8 @@ export default function Gallery() {
         console.log(url)
         const resp = await fetch(url);
         const data = await resp.json();
+        console.log("API 응답 필드:", Object.keys(data.response.body.items.item[0]));
+        console.log("첫 번째 아이템:", data.response.body.items.item[0]);
         setTdata(data.response.body.items.item)
       }
 

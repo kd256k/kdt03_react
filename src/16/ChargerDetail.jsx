@@ -9,7 +9,7 @@ export default function ChargerDetail() {
   console.log(item)
 
   const navigate = useNavigate();
-
+  // 목록으로 돌아갈 때 검색 조건을 쿼리 파라미터로 전달하여 이전 결과 복원
   const handleHome = () => {
     navigate(`/chargerinfo`);
   }
