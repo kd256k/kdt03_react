@@ -9,10 +9,10 @@ export default function ChargerCard({color, title, num}) {
                     border border-gray-200 rounded-md
                     p-5
                     flex flex-col justify-center items-center`}>
-        <p className='text-sm text-gray-400' >
+        <p className='text-sm text-gray-600' >
             {title}
         </p>
-        <p className='text-sm text-gray-400' >
+        <p className='text-2xl font-bold text-gray-600' >
             {num}
         </p>
     </div>

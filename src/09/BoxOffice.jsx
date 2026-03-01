@@ -9,6 +9,20 @@ const getYesterday = () => {
     return yesterday.toISOString().slice(0, 10);
 }
 
+function BoxOfficeSkeleton() {
+    return (
+        <tr className="bg-white border-b border-gray-200 animate-pulse">
+            <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded w-8"></div></td>
+            <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded w-32"></div></td>
+            <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded w-24"></div></td>
+            <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded w-20"></div></td>
+            <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded w-24"></div></td>
+            <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded w-20"></div></td>
+            <td className="px-6 py-4"><div className="h-4 bg-gray-200 rounded w-12"></div></td>
+        </tr>
+    );
+}
+
 export default function BoxOffice() {
     const [trs, setTrs] = useState([]);
     const [info, setInfo] = useState();
@@ -79,39 +93,42 @@ export default function BoxOffice() {
                         value={getYesterday()} 
                         onChange={handleSelectDt} />
             </div>
-            <table className="w-9/10 text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" className="px-4 py-3">순위</th>
-                        <th scope="col" className="px-4 py-3">영화명</th>
-                        <th scope="col" className="px-4 py-3">매출액</th>
-                        <th scope="col" className="px-4 py-3">관객수</th>
-                        <th scope="col" className="px-4 py-3">누적 매출액</th>
-                        <th scope="col" className="px-4 py-3">누적관객수</th>
-                        <th scope="col" className="px-4 py-3">증감률</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {trs.map(item => 
-                    <tr key = {item.movieCd}
-                        onClick={() => handleShowInfo(item)}
-                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200
-                           hover:bg-gray-50 hover:cursor-pointer dark:hover:bg-gray-600">
-                        <td scope="row" className="px-4 py-2 font-medium text-gray-700 whitespace-nowrap dark:text-white">
-                            {item.rank}</td>
-                        <td className="px-4 py-2">{item.movieNm}</td>
-                        <td className="px-4 py-2 text-right">{parseInt(item.salesAmt).toLocaleString()}</td>
-                        <td className="px-4 py-2 text-right">{parseInt(item.audiCnt).toLocaleString()}</td>
-                        <td className="px-4 py-2 text-right">{parseInt(item.salesAcc).toLocaleString()}</td>
-                        <td className="px-4 py-2 text-right">{parseInt(item.audiAcc).toLocaleString()}</td>
-                        <td className="px-4 py-2 text-center">
-                            {item.rankInten > 0 ? <span className="text-red-600">▲{item.rankInten}</span>
-                        : item.rankInten < 0 ? <span className="text-blue-600">▼{item.rankInten}</span>
-                        : <span>-</span>}
-                        </td>
-                    </tr>)}
-                </tbody>
-            </table>
+            <div className="min-w-full">
+                <table className="min-w-full divide-y divide-table-line text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" className="px-6 py-3 text-sm font-medium text-muted-foreground">순위</th>
+                            <th scope="col" className="px-6 py-3 text-sm font-medium text-muted-foreground">영화명</th>
+                            <th scope="col" className="px-6 py-3 text-sm font-medium text-muted-foreground">매출액</th>
+                            <th scope="col" className="px-6 py-3 text-sm font-medium text-muted-foreground">관객수</th>
+                            <th scope="col" className="px-6 py-3 text-sm font-medium text-muted-foreground">누적 매출액</th>
+                            <th scope="col" className="px-6 py-3 text-sm font-medium text-muted-foreground">누적관객수</th>
+                            <th scope="col" className="px-6 py-3 text-sm font-medium text-muted-foreground">증감률</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {trs.length === 0 
+                            ? Array(10).fill(0).map((_, i) => <BoxOfficeSkeleton key={i} />)
+                            : trs.map(item => <tr key={item.movieCd} 
+                                                onClick={() => handleShowInfo(item)}
+                                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200
+                                                            hover:bg-gray-50 hover:cursor-pointer dark:hover:bg-gray-600">
+                            <td scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+                                {item.rank}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground">{item.movieNm}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">{parseInt(item.salesAmt).toLocaleString()}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">{parseInt(item.audiCnt).toLocaleString()}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">{parseInt(item.salesAcc).toLocaleString()}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-foreground">{parseInt(item.audiAcc).toLocaleString()}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                {item.rankInten > 0 ? <span className="text-red-600">▲{item.rankInten}</span>
+                            : item.rankInten < 0 ? <span className="text-blue-600">▼{item.rankInten}</span>
+                            : <span>-</span>}
+                            </td>
+                        </tr>)}
+                    </tbody>
+                </table>
+            </div>
             <div className="w-9/10 h-14 p-5 flex justify-center items-center
                             dark:bg-gray-700
                             text-lg  dark:text-white font-bold mt-5

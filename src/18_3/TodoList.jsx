@@ -34,7 +34,7 @@ export default function TodoList() {
   return (
     <div className="w-full flex flex-col justify-start items-center">
       <h1 className="w-full max-w-3xl text-2xl font-bold text-center mt-10">
-        할일 목록
+        할 일 목록
       </h1>
       <div className="w-full max-w-3xl
                      p-5 my-2 font-bold

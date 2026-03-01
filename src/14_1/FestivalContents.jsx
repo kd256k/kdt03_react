@@ -7,7 +7,7 @@ export default function FestivalContents() {
 
   const navigate = useNavigate();
   const handleHome = () => {
-    navigate('/festival');
+    navigate(-1);
   }
 
   const kakaoMapUrl = `https://map.kakao.com/link/map/${item?.MAIN_PLACE.replace(',','').replace(' ','')},${item?.LAT},${item?.LNG}`;
@@ -23,24 +23,29 @@ export default function FestivalContents() {
         </div>
         <div className="md:col-span-2 bg-white shadow-md rounded-lg">
         <div className="w-full grid grid-cols-1 md:grid-cols-6 gap-2 text-sm">
-          <div className="p-2 md:text-right">축제구분</div>
-          <div className="font-bold md:col-span-5  p-2">{item.GUGUN_NM}</div>
-          <div className="p-2 md:text-right">주소</div>
-          <div className="font-bold md:col-span-5 p-2">{item.ADDR1}
+          <div className="p-2 font-bold md:text-right">축제구분</div>
+          <div className="font-semi bold md:col-span-5  p-2">{item.GUGUN_NM}</div>
+          <div className="p-2 font-bold md:text-right">주소</div>
+          <div className="font-semi bold md:col-span-5 p-2">{item.ADDR1}
             <a href={kakaoMapUrl} target="_blank" 
               className="bg-amber-300 p-2 rounded-sm mx-4"
             >카카오지도보기</a>
           </div>
-          <div className="p-2 md:text-right">연락처</div>
-          <div className="font-bold md:col-span-5 p-2">{item.CNTCT_TEL}</div>
-          <div className="p-2 md:text-right">홈페이지</div>
-          <div className="font-bold md:col-span-5 p-2">
+          <div className="p-2 font-bold md:text-right">연락처</div>
+          <div className="font-semi bold md:col-span-5 p-2">{item.CNTCT_TEL}</div>
+          <div className="p-2 font-bold md:text-right">홈페이지</div>
+          <div className="font-semibold md:col-span-5 p-2">
             <a href={item.HOMEPAGE_URL} target="_blank" rel="noopener noreferrer">
               {item.HOMEPAGE_URL}
             </a>
           </div>
-          <div className="p-2 md:text-right">상세내용</div>
-          <div className="font-bold md:col-span-5 p-2">{item.ITEMCNTNTS}</div>
+          <div className="p-2 font-bold md:text-right">상세내용</div>
+          <div className="text-sm md:col-span-5 p-2">{item.ITEMCNTNTS?.length > 250 
+                                                      ? (() => {
+                                                        const sliced = item.ITEMCNTNTS.slice(0, 250);
+                                                        const dotIdx = sliced.lastIndexOf('.');
+                                                        return dotIdx > 0 ? sliced.slice(0, dotIdx + 1) : sliced;
+                                                      })() : item.ITEMCNTNTS}</div>
         </div>
       </div>
       </div>

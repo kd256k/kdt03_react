@@ -34,9 +34,9 @@ return (
                     my-4">
     <input type="text"
       ref={inRef}
-      className="flex-1 p-2 border border-gray-200
+      className="flex-1 p-2 bg-gray-50 border border-gray-200
                         rounded-sm
-                        focus:outline-none focus:ring-2 focus:ring-blue-600" />
+                        focus:outline-none focus:ring-2 focus:ring-[#003675] focus:border-[#003675]" />
 
     <TailButton color="blue"
       caption="추가"

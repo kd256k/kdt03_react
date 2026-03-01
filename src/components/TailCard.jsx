@@ -4,19 +4,19 @@ export default function TailCard({ imgUrl, title, subtitle, tag }) {
     if (tag.includes(',')) {
         tags = tag.split(',')
         tags = tags.map(kw => <span key={kw}
-                                className="bg-amber-100 rounded-sm p-2 inline-flex m-1 text-sm">
+                                className="bg-[#EFF5FF] rounded-sm p-2 inline-flex m-1 text-sm">
                                 {kw}
                               </span>);
         if(tags.length >= 4 ) tags = tags.slice(0,5);
     }
     else {
-        tags = <span className="bg-amber-100 rounded-sm p-2 flex m-1 text-sm h-14"> {tag}</span>
+        tags = <span className="bg-[#EFF5FF] rounded-sm p-2 flex m-1 text-sm h-14"> {tag}</span>
 
      };
 
     //console.log(tags)
     return (
-        <div className="max-w-sm h-96 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div className="max-w-sm h-96 bg-white border border-[#CDD7E4] rounded-lg shadow-sm">
             <div>
                 <img className="rounded-t-lg w-full h-46 object-cover"
                     src={imgUrl} alt=""

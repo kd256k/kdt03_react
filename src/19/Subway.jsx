@@ -3,6 +3,25 @@ import SubwayBox from "./SubwayBox";
 import TailSelect from "../components/TailSelect";
 import { useState, useRef, use, Suspense } from "react";
 
+function SubwaySkeleton() {
+    return (
+        <div className="w-full flex flex-col my-10 rounded-xl shadow-md overflow-hidden animate-pulse">
+            <div className="w-full px-5 py-3 bg-[#2A5C96] flex justify-between items-center">
+                <div className="h-5 bg-blue-300 rounded w-1/2"></div>
+                <div className="h-6 bg-blue-300 rounded-full w-16"></div>
+            </div>
+            <div className="w-full grid grid-cols-2 md:grid-cols-5 lg:grid-cols-9 gap-2 p-2">
+                {Array(9).fill(0).map((_, i) => (
+                    <div key={i} className="flex flex-col rounded-lg overflow-hidden border border-gray-200">   
+                        <div className="bg-gray-200 p-2 h-12"></div>
+                        <div className="p-2 h-8 bg-gray-100"></div> 
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 const dataCache = new Map();
 
 function fetchData(area) {
@@ -15,15 +34,22 @@ function fetchData(area) {
         const promise = fetch(url)
             .then(resp => {
                 if (!resp.ok) throw new Error(`HTTP error! status: ${resp.status}`);
+                const contentType = resp.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")){
+                    return resp.text().then(text => {
+                        console.log("응답 내용:", text);
+                        throw new Error("JSON이 아닌 응답");
+                    });
+                }
                 return resp.json();
             })
             .then(data => {
                 if (data.response.body.items === "" || !data.response.body.items) return [];
                 let tm = data.response.body.items.item;
-                tm = tm.sort((a, b) => a.controlnumber - b.controlnumber);
+                tm = tm.sort((a, b) => b.controlnumber - a.controlnumber);
                 return tm;
             });
-        dataCache.set(url, promise);
+        dataCache.set(url, promise.catch(() => []));
     }
     return dataCache.get(url);
 }
@@ -66,7 +92,11 @@ export default function Subway() {
                     onHandle={handleSelect}
                 />
             </div>
-            <Suspense fallback={<div className="w-full text-center text-xl font-bold p-5">로딩중...</div>}>
+            <Suspense fallback={
+                <div className="w-full">
+                    {Array(3).fill(0).map((_, i) => <SubwaySkeleton key={i} />)}
+                </div>
+                }>
                 {selectedArea ? (
                     <SubwayData area={selectedArea} />
                 ) : (

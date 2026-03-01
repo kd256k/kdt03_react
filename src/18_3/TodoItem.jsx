@@ -66,7 +66,7 @@ export default function TodoItem({todo, getTodos}) {
       {isEdit ? <input type="text"
         value={editText}
         onChange={(e) => setEditText(e.target.value)}
-        className="flex-1 p-2 mx-2 border border-gray-200
+        className="flex-1 p-2 mx-2 bg-gray-50 border border-gray-200
                         rounded-sm
                         focus:outline-none focus:ring-2 focus:ring-blue-600"
       />

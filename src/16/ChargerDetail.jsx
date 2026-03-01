@@ -4,14 +4,19 @@ import TailButton from "../components/TailButton"
 import { useLocation, useNavigate } from "react-router-dom"
 
 export default function ChargerDetail() {
-  const locaton = useLocation();
-  const item = locaton.state.item;
+  const location = useLocation();
+  const item = location.state.item;
   console.log(item)
 
   const navigate = useNavigate();
   // 목록으로 돌아갈 때 검색 조건을 쿼리 파라미터로 전달하여 이전 결과 복원
   const handleHome = () => {
-    navigate(`/chargerinfo`);
+    const sp = location.state?.searchParams;
+    if (sp) {
+      navigate(`/chargerinfo?zcode=${sp.zcode}&zscode=${sp.zscode}&kind=${sp.kind}&kindDetail=${sp.kindDetail}`);
+    } else {
+      navigate(-1);
+    }
   }
 
   const kakaoMapUrl = `https://map.kakao.com/link/map/${item?.statNm.replace(',', '').replace(' ', '')},${item?.lat},${item?.lng}`;

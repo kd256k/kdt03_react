@@ -44,9 +44,9 @@ export default function SubwayBox({ item }) {
   const overall = getOverallStatus(item);
 
   return (
-    <div className="w-full flex flex-col justify-start my-3 rounded-xl shadow-md overflow-hidden">
+    <div className="w-full flex flex-col justify-start my-10 rounded-xl shadow-md overflow-hidden">
       {/* 헤더 */}
-      <div className="w-full px-5 py-3 bg-gray-700 text-white font-bold flex justify-between items-center">
+      <div className="w-full px-5 py-3 bg-[#2A5C96] text-white font-bold flex justify-between items-center">
         <span>
           {item.office} {item.site} {item.city}
           &nbsp;({item.controlnumber.slice(0, 4)}.{item.controlnumber.slice(4, 6)}.{item.controlnumber.slice(6, 8)}&nbsp;
@@ -67,9 +67,9 @@ export default function SubwayBox({ item }) {
 
           return (
             <div key={c} className="w-full flex flex-col rounded-lg overflow-hidden border border-gray-200">
-              <div className="bg-gray-600 text-white p-2 font-bold text-sm flex flex-col justify-center items-center">
+              <div className="bg-[#D3E1FB] text-gray-700 p-2 font-bold text-sm flex flex-col justify-center items-center">
                 <div>{scode[c]["name"]}</div>
-                <div className="text-xs text-gray-300">({c})</div>
+                <div className="text-xs text-gray-700">({c})</div>
               </div>
               <div className={`p-2 text-center text-sm font-semibold ${valueCls}`}>
                 {displayValue} {displayUnit}

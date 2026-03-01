@@ -10,14 +10,24 @@ import ChargerCard from "./ChargerCard"
 import ChargerStat from "./ChargerStat"
 
 import { useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
+
+function ChargerSkeleton() {
+    return (
+        <div className="border h-20 border-gray-200 flex justify-center items-center
+                    p-4 animate-pulse">
+            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+        </div>      
+    );
+}
 
 export default function ChargerInfo() {
   //상태변수
   const [tdata, setTdata] = useState([]);
   const [zsc, setZsc] = useState(null);
   const [kindDetail, setKindDetail] = useState(null);
-  const [isLoding, setIsLoding] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchParams] = useSearchParams();
 
   //select 박스 
   const sel1Ref = useRef();
@@ -36,25 +46,32 @@ export default function ChargerInfo() {
     url = `${url}&dataType=JSON`;
     console.log(url)
 
-    setIsLoding(true);
+    setIsLoading(true);
     try {
       const resp = await fetch(url);
       const data = await resp.json();
 
-      setTdata(data.items.item);
+      setTdata(data.items?.item || []);
     } catch (error) {
       console.log(error)
     }
     finally {
-      setIsLoding(false);
+      setIsLoading(false);
     }
   }
 
+  
+    
   //시도 선택
   const handleZcode = () => {
     setZsc(null);
+    setKindDetail(null);
     setTdata([]);
-    setIsLoding(false);
+    setIsLoading(false);
+
+    sel2Ref.current.value = "";
+    sel3Ref.current.value = "";
+    sel4Ref.current.value="";
 
     if (sel1Ref.current.value == "")
       setZsc(null);
@@ -66,7 +83,9 @@ export default function ChargerInfo() {
   const handleKind = () => {
     setKindDetail(null);
     setTdata([]);
-    setIsLoding(false);
+    setIsLoading(false);
+
+    sel4Ref.current.value="";
 
     console.log(sel3Ref.current.value, kinddetail[sel3Ref.current.value])
     if (sel3Ref.current.value == "")
@@ -85,7 +104,7 @@ export default function ChargerInfo() {
     setZsc(null);
     setKindDetail(null);
     setTdata([]);
-    setIsLoding(false);
+    setIsLoading(false);
   }
 
   //검색
@@ -112,7 +131,7 @@ export default function ChargerInfo() {
     }
 
     setTdata([]);
-    setIsLoding(false);
+    setIsLoading(true);
     getFetchData();
   }
 
@@ -123,6 +142,28 @@ export default function ChargerInfo() {
 
     console.log(tdata)
   }, [tdata]);
+
+  useEffect(() => { //컴포넌트 마운트 시 URL 파라미터로 자동 탐색
+    const pZcode = searchParams.get("zcode");
+    const pZscode = searchParams.get("zscode");
+    const pKind = searchParams.get("kind");
+    const pKindDetail = searchParams.get("kindDetail");
+
+    if (pZcode && pZscode && pKind && pKindDetail) {
+      // 셀렉트박스 값 세팅
+      sel1Ref.current.value = pZcode;
+      setZsc(zscode[pZcode]); // zscode 데이터 로드
+      setTimeout(()=> {
+        sel2Ref.current.value = pZscode;
+        sel3Ref.current.value = pKind;
+        setKindDetail(kinddetail[pKind]);
+        setTimeout(()=> {
+          sel4Ref.current.value = pKindDetail;
+          getFetchData();
+        }, 100);
+      }, 100);
+    }
+  }, []);
 
   return (
     <div className="w-full flex flex-col justify-start items-center">
@@ -185,7 +226,9 @@ export default function ChargerInfo() {
           {
             tdata.map((item, idx) => <Link to="/ChargerInfo/detail"
                                             key={item.statId + idx}
-                                            state={{ item: item }}>
+                                            state={{ item: item, 
+                                            searchParams: { zcode: sel1Ref.current.value, zscode: sel2Ref.current.value,
+                                            kind: sel3Ref.current.value,  kindDetail: sel4Ref.current.value }}}>
                                             <ChargerStat key={item.statId}
                                                         statNm={`${item.statNm}(${item.chgerId})`} />
                                       </Link>
@@ -194,10 +237,15 @@ export default function ChargerInfo() {
 
         </div>
       }
+      {!isLoading && tdata.length === 0 && sel1Ref.current?.value && sel2Ref.current?.value && sel3Ref.current?.value && sel4Ref.current?.value &&(
+        <div className="w-full p-5 text-center text-gray-500">
+          검색 결과가 없습니다.
+        </div>
+      )}
       {
-        isLoding &&
-        <div className="w-full p-5 mb-4 flex justify-center items-center">
-          <img src="/img/loading.gif" alt="로딩중" />
+        isLoading &&
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mt-5">
+          {Array(12).fill(0).map((_, i) => <ChargerSkeleton key={i} />)}
         </div>
       }
     </div>
