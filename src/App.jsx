@@ -19,7 +19,7 @@ import RouteMain from './15/RouteMain'
 import FestivalContents from './14_1/FestivalContents'
 import ChargerInfo from './16/ChargerInfo'
 import ChargerDetail from './16/ChargerDetail'
-// import JotaiCnt from './17/JotaiCnt'
+import JotaiCnt from './17/JotaiCnt'
 import TodoList from './18_3/TodoList'
 import Subway from './19/Subway'
 import Login from './Login'
@@ -40,7 +40,7 @@ function App() {
             <Route path='/ChargerInfo' element={<ChargerInfo />} />
             <Route path='/ChargerInfo/detail' element={<ChargerDetail />} />
             <Route path='/todolist' element={<TodoList />} />
-            <Route path='/subway' element={<Subway />} />
+            <Route path='/Subway' element={<Subway />} />
           </Routes>
         </main>
         <Footer />

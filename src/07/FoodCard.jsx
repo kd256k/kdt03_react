@@ -17,10 +17,9 @@ export default function FoodCard({ data }) {
                     border border-gray-300 
                     rounded-sm">
       <div className="w-44 h-full px-5 py-2 flex justify-center">
-        <img src={data['구분'] == " 광역지원센터" ? busan :
-          data['구분'] == "기초푸드뱅크" ? bank : market}
-          alt={data['구분']}
-          className="w-30 h-30" />
+        <img src={data['구분'] == "광역지원센터" ? busan : data['구분'] == "기초푸드뱅크" ? bank : market}
+            alt={data['구분']}
+           className="w-30 h-30"/>
       </div>
       <div className="w-2/3 h-full flex flex-col justify-between py-2">
         <div>
@@ -28,13 +27,13 @@ export default function FoodCard({ data }) {
             {data['사업장명']}
           </h1>
           <h2 className="text-lg font-bold text-gray-500">
-            {data = ['운영주체명']}
+            {data['운영주체명']}
           </h2>
-          <p className="text-md text-gray-500">
-            {data = ['사업장소재지']}
+          <p className="text-md font-semi bold text-gray-500">
+            {data['사업장 소재지']}
           </p>
         </div>
-        <div className="w-full h-10 bg-gray-600 text-white cursor-pointer"
+        <div className="w-full h-10 bg-gray-400 text-white cursor-pointer"
           onClick={handleClick}>
           {isActive &&
             <ul className="w-full h-full flex justify-center items-center space-x-6">

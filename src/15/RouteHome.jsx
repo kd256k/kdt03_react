@@ -9,7 +9,7 @@ export default function RouteHome() {
       <div className="flex">
         <TailButton color="blue"  
                     caption="페이지1"
-                    onHandle={() => navigate('/p1')}/>
+                    onHandle={() => navigate('/RouteMain/p1')}/>
       </div>
       
     </div>
