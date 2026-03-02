@@ -8,7 +8,7 @@ import { festivalFetchData, selGuAtom } from './atomFestival';
 
 function FestivalSkeleton() {
   return (
-    <div className="bg-white rounded-log shadow overflow-hidden animate-pulse">
+    <div className="w-full bg-white rounded-log shadow overflow-hidden animate-pulse">
       <div className="h-48 bg-gray-200"></div>
       <div className="p-4">
         <div className="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>
@@ -26,10 +26,10 @@ export default function Festival() {
       <h1 className="w-9/10 m-6 mb-0 p-4 text-2xl text-gray-800 font-bold text-center bg-[#D3E1FB] rounded-t-lg">
         부산축제정보
       </h1>
-      <div className="w-9/10 bg-[#D3E1FB] rounded-b-log p-3 flex justify-center items-center">
+      <div className="w-9/10 bg-[#D3E1FB] rounded-b-lg p-3 flex justify-center items-center">
         <div className="w-1/3 h-10 bg-gray-200 rounded-lg animate-pulse"></div>
       </div>
-      <div className="mt-4 w-9/10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="mt-4 w-9/10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
         {Array(6).fill(0).map((_, i) => <FestivalSkeleton key={i} />)}
       </div>
     </div>
@@ -109,11 +109,12 @@ function FestivalContent() {
                         </select>
                     </div>
                     <div className="mt-4 w-9/10
-                                    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
                       {
                         areaFestival.map((item,idx) =>  <Link to="/festival/contents"
                                                               state={{contents:item}}
-                                                              key={item.UC_SEQ+idx}>
+                                                              key={item.UC_SEQ+idx}
+                                                              className="block w-full">
                                                         <TailCard key ={item.UC_SEQ}
                                                               imgUrl={item.MAIN_IMG_THUMB}
                                                               title={item.MAIN_TITLE.includes('(') ? item.MAIN_TITLE.split('(')[0]: item.MAIN_TITLE} 

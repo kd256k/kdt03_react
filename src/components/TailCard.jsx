@@ -10,28 +10,28 @@ export default function TailCard({ imgUrl, title, subtitle, tag }) {
         if(tags.length >= 4 ) tags = tags.slice(0,5);
     }
     else {
-        tags = <span className="bg-[#EFF5FF] rounded-sm p-2 flex m-1 text-sm h-14"> {tag}</span>
+        tags = <span className="bg-[#EFF5FF] rounded-sm p-2 flex m-1 text-sm h-14 items-center"> {tag}</span>
 
      };
 
     //console.log(tags)
     return (
-        <div className="max-w-sm h-96 bg-white border border-[#CDD7E4] rounded-lg shadow-sm">
+        <div className="w-full h-96 bg-white border border-[#CDD7E4] rounded-lg shadow-sm overflow-hidden">
             <div>
                 <img className="rounded-t-lg w-full h-46 object-cover"
                     src={imgUrl} alt=""
                     onError={(e) => { e.currentTarget.src = "https://placehold.co/400x300?text=No+Image"; }} />
             </div>
             <div className="p-2 h-50 flex flex-col jusify-between">
-                <div>
+                <div className="m-1">
                     <h1 className="text-2xl font-bold text-gray-800">
                         {title}
                     </h1>
-                    <p className="mb-2 font-medium tracking-tight text-gray-800 text-sm" >
+                    <p className="mb-2 font-medium tracking-tight text-gray-700 text-sm line-clamp-3" >
                         {subtitle}
                     </p>
                 </div>
-                <p className="mb-1 font-normal text-gray-700">
+                <p className="font-normal text-gray-700 line-clamp-2">
                     {tags}
                 </p>
             </div>
