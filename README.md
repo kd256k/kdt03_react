@@ -1,8 +1,9 @@
-# KDT03 React 포트폴리오 | KDT03 React Portfolio
+# KDT03 React 
 
 ## 프로젝트 소개 | About
 
-AI 데이터 분석 풀스택 웹 개발자 양성과정(2025 3기) React 기반 포트폴리오 웹 애플리케이션입니다.
+AI 데이터 분석 풀스택 웹 개발자 양성과정(2025 3기) 
+React 기반 포트폴리오 웹 애플리케이션입니다.
 Vite 번들러를 사용하며, 공공 API 연동과 다양한 React 기능을 실습한 프로젝트입니다.
 
 A portfolio web application built with React + Vite during the AI Data Analysis Full-Stack Web Developer Training Program (2025 Cohort 3). Features public API integration and various React patterns.
