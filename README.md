@@ -1,16 +1,38 @@
-# React + Vite
+# KDT03 React 포트폴리오 | KDT03 React Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 프로젝트 소개 | About
 
-Currently, two official plugins are available:
+AI 데이터 분석 풀스택 웹 개발자 양성과정(2025 3기)에서 제작한 React 기반 포트폴리오 웹 애플리케이션입니다.
+Vite 번들러를 사용하며, 공공 API 연동과 다양한 React 기능을 실습한 프로젝트입니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A portfolio web application built with React + Vite during the AI Data Analysis Full-Stack Web Developer Training Program (2025 Cohort 3). Features public API integration and various React patterns.
 
-## React Compiler
+## 기술 스택 | Tech Stack
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Library**: React 19
+- **Build**: Vite
+- **Styling**: Tailwind CSS, PostCSS
+- **Language**: JavaScript (ES6+)
+- **Deploy**: Vercel
 
-## Expanding the ESLint configuration
+## 주요 기능 | Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 공공 API 연동을 통한 데이터 조회 및 시각화
+- React Router 기반 SPA 라우팅
+- 재사용 가능한 컴포넌트 설계
+- 반응형 UI 구현
+
+## 실행 방법 | Getting Started
+
+```bash
+git clone https://github.com/kd256k/kdt03_react.git
+cd kdt03_react
+npm install
+npm run dev
+```
+
+http://localhost:5173 에서 확인
+
+## 배포 | Deployment
+
+Vercel을 통한 자동 배포가 설정되어 있습니다 (`vercel.json` 포함).
