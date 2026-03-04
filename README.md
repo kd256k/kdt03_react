@@ -1,29 +1,47 @@
-# KDT03 React 
+# KDT03 React 포트폴리오
 
-## 프로젝트 소개 | About
+## 프로젝트 소개
 
-AI 데이터 분석 풀스택 웹 개발자 양성과정(2025 3기) 
-React 기반 포트폴리오 웹 애플리케이션입니다.
-Vite 번들러를 사용하며, 공공 API 연동과 다양한 React 기능을 실습한 프로젝트입니다.
+AI 데이터 분석 풀스택 웹 개발자 양성과정(2025 3기) React 기반 포트폴리오 웹 애플리케이션입니다.
+공공 API 연동, Supabase 인증/DB, 다양한 React 패턴을 실습한 프로젝트입니다.
 
-A portfolio web application built with React + Vite during the AI Data Analysis Full-Stack Web Developer Training Program (2025 Cohort 3). Features public API integration and various React patterns.
+## 기술 스택
 
-## 기술 스택 | Tech Stack
-
-- **Library**: React 19
-- **Build**: Vite
-- **Styling**: Tailwind CSS, PostCSS
-- **Language**: JavaScript (ES6+)
+- **Library**: React 19, React Router 7
+- **Build**: Vite 7
+- **Styling**: Tailwind CSS 4
+- **Backend**: Supabase (GitHub OAuth 인증, PostgreSQL)
+- **State**: Jotai
 - **Deploy**: Vercel
 
-## 주요 기능 | Features
+## 주요 기능
 
-- 공공 API 연동을 통한 데이터 조회 및 시각화
-- React Router 기반 SPA 라우팅
-- 재사용 가능한 컴포넌트 설계
-- 반응형 UI 구현
+- **로그인**: GitHub OAuth 인증 (Supabase Auth)
+- **영화 박스오피스**: KOBIS API 연동, 일별 박스오피스 조회
+- **관광지 갤러리**: 한국관광공사 API 연동, 관광지 이미지 조회
+- **부산 축제 정보**: 공공데이터 포털 API, 구군별 필터링
+- **전기차 충전소**: 공공데이터 포털 API, 지역/종류별 필터링
+- **부산 지하철 정보**: 역별 시간표 조회
+- **교통사고 통계**: 공공데이터 포털 API, 대분류/소분류 필터링
+- **할일 목록**: Supabase DB 연동 Todo 앱 (CRUD)
+- **로또 번호 생성기**: 랜덤 번호 생성 UI
 
-## 실행 방법 | Getting Started
+## 페이지 구성
+
+```
+/                    → GitHub OAuth 로그인
+/lotto               → 로또 번호 생성기
+/box                 → 영화 박스오피스
+/gallery             → 관광지 갤러리
+/festival            → 부산 축제 목록
+/festival/contents   → 축제 상세
+/ChargerInfo         → 전기차 충전소 목록
+/ChargerInfo/detail  → 충전소 상세
+/Subway              → 부산 지하철 정보
+/todolist            → 할일 목록 (Supabase)
+```
+
+## 실행 방법
 
 ```bash
 git clone https://github.com/kd256k/kdt03_react.git
@@ -34,6 +52,13 @@ npm run dev
 
 http://localhost:5173 에서 확인
 
-## 배포 | Deployment
+## 환경변수
 
-Vercel을 통한 자동 배포가 설정되어 있습니다 (`vercel.json` 포함).
+`.env` 파일을 생성하고 아래 항목을 설정하세요.
+
+```
+VITE_API_KEY=<공공데이터 포털 API 키>
+VITE_MV_API=<KOBIS 영화 API 키>
+VITE_SUPABASE_URL=<Supabase 프로젝트 URL>
+VITE_SUPABASE_KEY=<Supabase anon key>
+```
