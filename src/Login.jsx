@@ -12,7 +12,6 @@ function Login() {
   const [user, setUser] = useState(null);
 
   const [isLogin, setIsLogin] = useAtom(isLoginAtom);
-  console.log("Login", isLogin);
 
   const redirectUrl = process.env.NODE_ENV === 'production'
   ? 'https://kdt03-react-2fkt.vercel.app/'

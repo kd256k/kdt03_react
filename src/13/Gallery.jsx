@@ -37,7 +37,6 @@ export default function Gallery() {
         let url = `${baseUrl}serviceKey=${apikey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A`;
         url = `${url}&keyword=${kw}&_type=json`;
 
-        console.log(url)
         const resp = await fetch(url);
         const data = await resp.json();
         console.log("API 응답 필드:", Object.keys(data.response.body.items.item[0]));

@@ -3,8 +3,8 @@ import TodoInput from "./TodoInput"
 import TodoItem from "./TodoItem"
 import { useState, useEffect } from "react"
 
-const supabaseUrl = import.meta.env.VITE_SUPABSE_URL ;
-const supabaseKey = import.meta.env.VITE_SUPABSE_KEY ;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY ;
 
 export default function TodoList() {
   const [todos, setTodos] = useState([]);

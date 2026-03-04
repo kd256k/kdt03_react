@@ -38,7 +38,6 @@ export default function Traffic() {
 
     //대분류
     useEffect(() => {
-        console.log(tdata)
         if (tdata.length == 0) return;
 
         let tm = tdata.map(item => item["사고유형대분류"]);
@@ -48,7 +47,6 @@ export default function Traffic() {
         //setC1(tm)이 생성 결과값
         // 
 
-        console.log(tm)
     }, [tdata]);
 
     //사고유형
@@ -80,7 +78,6 @@ export default function Traffic() {
 
     //사고 데이터가 결정되면 (tInfo 변화가 있으면 함수실행)
     useEffect(() => {
-        console.log(tinfo)
     }, [tinfo]) ;
 
     return (

@@ -1,8 +1,8 @@
 import TailButton from "../components/TailButton";
 import { useRef } from "react";
 
-const supabaseUrl = import.meta.env.VITE_SUPABSE_URL ;
-const supabaseKey = import.meta.env.VITE_SUPABSE_KEY ;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY ;
 
 export default function TodoInput({getTodos}) {
   const inRef = useRef() ;

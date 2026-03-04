@@ -3,8 +3,8 @@ import TailButton from "../components/TailButton"
 // import { todosAtom } from "./atomsTodo"
 import { useState } from "react";
 
-const supabaseUrl = import.meta.env.VITE_SUPABSE_URL ;
-const supabaseKey = import.meta.env.VITE_SUPABSE_KEY ;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY ;
 
 export default function TodoItem({todo, getTodos}) {
   const [isEdit , setIsEdit] = useState(false) ;

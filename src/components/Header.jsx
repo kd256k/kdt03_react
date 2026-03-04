@@ -4,7 +4,6 @@ import { isLoginAtom } from "../atoms/atoms"
 
 export default function Header() {
   const isLogin = useAtomValue(isLoginAtom) ;
-  console.log("Header", isLogin)
   return (
     <header className='bg-[#002046] text-white shadow-md'>
       <nav className='container h-16 mx-auto flex justify-between items-center'>

@@ -1,7 +1,6 @@
 
 
 export default function TrafficInfo({ infoData }) {
-    console.log(infoData)
     const show = ["사고건수", "사망자수", "중상자수", "경상자수", "부상신고자수"];
 
     return (

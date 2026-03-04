@@ -14,7 +14,6 @@ export default function MyRef() {
 
     const handleCnt = () => {
         cnt = cnt + 1;
-        console.log(cnt)
     }
 
 
@@ -24,7 +23,6 @@ export default function MyRef() {
     
     const handlerCnt = () => {
         rcnt.current = rcnt.current + 1;
-        console.log("rcnt", rcnt)
     }
     return (
         <div className="w-full h-full

@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from "react-router-dom"
 export default function ChargerDetail() {
   const location = useLocation();
   const item = location.state.item;
-  console.log(item)
 
   const navigate = useNavigate();
   // 목록으로 돌아갈 때 검색 조건을 쿼리 파라미터로 전달하여 이전 결과 복원

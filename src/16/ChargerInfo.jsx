@@ -44,7 +44,6 @@ export default function ChargerInfo() {
     url = `${url}&zcode=${sel1Ref.current.value}&zscode=${sel2Ref.current.value}`;
     url = `${url}&kind=${sel3Ref.current.value}&kindDetail=${sel4Ref.current.value}`;
     url = `${url}&dataType=JSON`;
-    console.log(url)
 
     setIsLoading(true);
     try {

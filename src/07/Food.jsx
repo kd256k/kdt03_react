@@ -13,7 +13,6 @@ export default function Food() {
   const[foodFilterData, setFoodFilterData] =useState(fooddata);
 
   const handleShowAll =() => {
-    console.log("all")
     setFoodFilterData(fooddata);
   }
   
