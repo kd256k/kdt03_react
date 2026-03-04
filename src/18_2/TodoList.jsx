@@ -13,7 +13,6 @@ export default function TodoList() {
 
   // console.log(todos)
   const getTodos = async () => {
-    console.log(supabaseKey)
 
     const resp = await fetch(`${supabaseUrl}/rest/v1/todos?select=*&order=id.desc`, {
       method: 'GET',
