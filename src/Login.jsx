@@ -14,7 +14,7 @@ function Login() {
   const [isLogin, setIsLogin] = useAtom(isLoginAtom);
 
   const redirectUrl = process.env.NODE_ENV === 'production'
-  ? 'https://kdt03-react-2fkt.vercel.app/'
+  ? 'https://kdt03-react-nine.vercel.app'
   : 'http://localhost:5173';
 
   // 컴포넌트가 마운트될 때 한 번 실행되는 useEffect
@@ -52,7 +52,7 @@ function Login() {
     await supabase.auth.signInWithOAuth({
       provider: 'github',
       options: {
-        redirectTo: `${redirectUrl}/`
+        redirectTo: redirectUrl
       }
     });
   };
