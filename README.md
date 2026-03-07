@@ -13,7 +13,7 @@ https://kdt03-react-nine.vercel.app
 - **Library**: React 19, React Router 7
 - **Build**: Vite 7
 - **Styling**: Tailwind CSS 4
-- **Backend**: Supabase (GitHub OAuth 인증, PostgreSQL)
+- **Backend**: Supabase (GitHub OAuth 인증, DB)
 - **State**: Jotai
 - **Deploy**: Vercel
 
