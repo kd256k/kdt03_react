@@ -1,4 +1,4 @@
-# KDT03 React 포트폴리오
+# KDT03 React
 
 ## 프로젝트 소개
 
