@@ -27,7 +27,7 @@ const dataCache = new Map();
 function fetchData(area) {
     const dt = new Date().toISOString().slice(0, 10).replaceAll('-', '');
     const apikey = import.meta.env.VITE_API_KEY;
-    const baseUrl = "/api/6260000/IndoorAirQuality/getIndoorAirQualityByStation?";
+    const baseUrl = "/public-api/6260000/IndoorAirQuality/getIndoorAirQualityByStation?";
     let url = `${baseUrl}serviceKey=${apikey}&pageNo=1&numOfRows=50`;
     url = `${url}&resultType=json&controlnumber=${dt}&areaIndex=${area}`;
     if (!dataCache.has(url)) {

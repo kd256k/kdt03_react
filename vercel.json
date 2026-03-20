@@ -1,12 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path*",
+      "source": "/public-api/:path*",
       "destination": "https://apis.data.go.kr/:path*"
-    },
-    {
-      "source": "/kobisopenapi/:path*",
-      "destination": "https://kobis.or.kr/kobisopenapi/:path*"
     }
   ]
 }

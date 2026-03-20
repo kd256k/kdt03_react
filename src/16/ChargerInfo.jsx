@@ -38,7 +38,7 @@ export default function ChargerInfo() {
   //데이터가져오기
   const getFetchData = async () => {
     const apikey = import.meta.env.VITE_API_KEY;
-    const baseUrl = `/api/B552584/EvCharger/getChargerInfo?`;
+    const baseUrl = `/public-api/B552584/EvCharger/getChargerInfo?`;
     let url = `${baseUrl}serviceKey=${apikey}`;
     url = `${url}&numOfRows=100&pageNo=1`;
     url = `${url}&zcode=${sel1Ref.current.value}&zscode=${sel2Ref.current.value}`;
